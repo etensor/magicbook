@@ -9,11 +9,21 @@
 conda create --name magicbook --file requirements.txt
 ```
 
+css del login
 
-Iniciar sesion en huggingface,
-pegando ``artread token``
+https://codepen.io/SaijoGeorge/pen/PopObdp
 
-```bash
 
-huggingface-cli login
-```
+replicate:
+    hosted ml services
+
+
+# https://replicate.com/blog/run-stable-diffusion-with-an-api
+# hosted api stable-diffusion
+
+## external ENV:
+export REPLICATE_API_TOKEN=...# https://replicate.com/blog/run-stable-diffusion-with-an-api
+# hosted api stable-diffusion
+
+## external ENV:
+export REPLICATE_API_TOKEN=...

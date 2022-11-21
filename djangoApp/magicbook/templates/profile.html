@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    user:
+    <h4>
+    {{ user.username }}
+    </h4>
+
+    email:
+    <h5>
+    {{ user.email }}
+    </h5>
+
+    <a  href="{{ HTTP_HOST }}/" style="padding-left: 40%">
+        Regresar
+    </a>
+
+    <hr>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Generar">
+    </form>
+
+
+    {% if img_generada %}
+        <div style="justify-content: center">
+            <img src="{{ img_generada }}"/>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<div class="homeinfo">
+
+    {% if user.is_authenticated %}
+        <p style="display: inline; margin-right: 10%"> Usuario: {{ request.user.username }}</p>
+        <small>
+            <a  href="{% url 'profile' %}" style="padding-left: -20%; margin-right: 1cm;">
+                perfil
+            </a>
+            <a  href="{% url 'logout' %}" style="padding-left: -20%;">
+                cerrar sesión
+            </a>
+        </small>
+        <hr>
+    {% else %}
+
+        <ul class="navBar">
+            <li class="navElem" ><a  href="/register"> Registrarse </a></li>
+            <li class="navElem" ><a  href="/login"> Iniciar sesión </a></li>
+        </ul>
+
+    {% endif %}
+
+    {% if request.session.recien_registrado %}
+    <p> Bienvenido. </p>
+    {% endif %}
+
+<p> Magicbook: Projecto Django usando Stable-Diffusion </p>
+
+
+</div>
+
+
+{% endblock %}
+
+
+
+{% comment %}
+
+{% for x in cars %}
+    <p> {{ x.model }} </p>
+    <h1> {{ x.brand }} </h1>
+    <p> {{ x.year }} </p>
+{% endfor %}
+
+
+{% cycle 'lightblue' 'pink' 'yellow' 'coral' 'grey' as bgcolor silent %}
+    <li style='background-color:{{ bgcolor }}'>
+
+
+
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary">Left</button>
+  <button type="button" class="btn btn-secondary">Middle</button>
+  <button type="button" class="btn btn-secondary">Right</button>
+</div>
+
+
+{% endcomment %}

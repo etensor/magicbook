@@ -7,12 +7,6 @@ django-crispy-forms
 gunicorn
 idna
 krb5
-libffi
-libgcc-ng
-libgomp
-libpq
-libstdcxx-ng
-libuuid
 ncurses
 openssl
 packaging

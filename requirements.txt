@@ -1,5 +1,4 @@
 asgiref
-bzip2
 ca-certificates
 certifi
 charset-normalizer

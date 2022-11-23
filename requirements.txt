@@ -7,7 +7,6 @@ django-crispy-forms
 gunicorn
 idna
 krb5
-openssl
 packaging
 pip
 psycopg2

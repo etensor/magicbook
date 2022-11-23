@@ -12,7 +12,6 @@ pip
 psycopg2
 pydantic
 pyparsing
-python
 readline
 replicate
 requests

@@ -24,6 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+SECURE_SSL_REDIRECT = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+#SECURE_HSTS_SECONDS = 10
 
 
 IS_HEROKU = "DYNO" in os.environ
@@ -39,14 +43,11 @@ if 'SECRET_KEY' in os.environ:
 
 
 # Generally avoid wildcards(*). However since Heroku router provides hostname validation it is ok
-if IS_HEROKU:
-    ALLOWED_HOSTS = ["*"]
-else:
-    ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ["magicbook271.herokuapp.com","127.0.0.1"]
 
 
-if not IS_HEROKU:
-    DEBUG = True
+DEBUG = False
 
 # Application definition
 
@@ -162,7 +163,7 @@ USE_TZ = True
 #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'magicbook/static'),
 )
 
 # Default primary key field type

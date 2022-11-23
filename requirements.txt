@@ -1,5 +1,3 @@
-_libgcc_mutex
-_openmp_mutex
 asgiref
 bzip2
 ca-certificates

@@ -7,7 +7,6 @@ django-crispy-forms
 gunicorn
 idna
 krb5
-libedit
 libffi
 libgcc-ng
 libgomp

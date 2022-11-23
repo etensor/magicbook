@@ -16,7 +16,6 @@ readline
 replicate
 requests
 setuptools
-sqlite
 sqlparse
 tk
 typing-extensions

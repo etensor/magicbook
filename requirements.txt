@@ -22,4 +22,3 @@ typing-extensions
 tzdata
 urllib3
 wheel
-zlib

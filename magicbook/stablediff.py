@@ -1,6 +1,6 @@
 import replicate
 
-
+# : export replicate api key
 
 def generarImagen(prompt: str):
     model = replicate.models.get("stability-ai/stable-diffusion")

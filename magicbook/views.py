@@ -17,7 +17,7 @@ from .stablediff import generarImagen
 
 def home(request):
     template = loader.get_template('home.html')
-    context = { 'usuario': "peperson"} # request.session['usuario']}
+    context = { 'usuario': "anonymous"} # request.session['usuario']}
 
     if request.user.is_authenticated:
         context['usuario'] = request.user.username

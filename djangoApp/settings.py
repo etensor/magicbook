@@ -10,10 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-import os
 from pathlib import Path
-import dj_database_url
-from django.test.runner import DiscoverRunner
+from os import path
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,32 +21,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-SECURE_SSL_REDIRECT = True
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-#SECURE_HSTS_SECONDS = 10
-
-
-IS_HEROKU = "DYNO" in os.environ
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "CHANGE_ME!!!! (P.S. the SECRET_KEY environment variable will be used, if set, instead)."
-
-if 'SECRET_KEY' in os.environ:
-    SECRET_KEY = os.environ["SECRET_KEY"]
+SECRET_KEY = 'django-insecure-@p&fj!vl6p$=g9fg=30+b*lg2)_&2qxo#22iv(&clfb57a94_+'
 
 
-# Generally avoid wildcards(*). However since Heroku router provides hostname validation it is ok
 
-ALLOWED_HOSTS = ["magicbook271.herokuapp.com","127.0.0.1"]
+# SECURITY WARNING: don't run with debug turned on in production!
 
 
-DEBUG = False
+DEBUG = True
+
+ALLOWED_HOSTS = ['magicbook271.herokuapp.com']
+
 
 # Application definition
 
@@ -77,8 +62,7 @@ ROOT_URLCONF = 'djangoApp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -97,10 +81,6 @@ WSGI_APPLICATION = 'djangoApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-
-MAX_CONN_AGE = 600
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -112,16 +92,6 @@ DATABASES = {
 
     }
 }
-
-if "DATABASE_URL" in os.environ:
-    # Configure Django for DATABASE_URL environment variable.
-    DATABASES["default"] = dj_database_url.config(
-        conn_max_age=MAX_CONN_AGE, ssl_require=True)
-
-    # Enable test database if found in CI environment.
-    if "CI" in os.environ:
-        DATABASES["default"]["TEST"] = DATABASES["default"]
-
 
 
 # Password validation
@@ -160,35 +130,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_ROOT = ''
-STATIC_URL = 'static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static/'),
-)
+STATIC_URL = '/static/'
+STATIC_ROOT = path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (path.join(BASE_DIR, 'static'),)
+django_heroku.settings(locals())
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
-
-###### deploying to heroku
-
-# Test Runner Config
-class HerokuDiscoverRunner(DiscoverRunner):
-    """Test Runner for Heroku CI, which provides a database for you.
-    This requires you to set the TEST database (done for you by settings().)"""
-
-    def setup_databases(self, **kwargs):
-        self.keepdb = True
-        return super(HerokuDiscoverRunner, self).setup_databases(**kwargs)
-
-
-# Use HerokuDiscoverRunner on Heroku CI
-if "CI" in os.environ:
-    TEST_RUNNER = "djangoApp.settings.HerokuDiscoverRunner"
-
-
-
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

@@ -4,6 +4,7 @@ charset-normalizer
 dj-database-url
 django
 django-crispy-forms
+django-heroku
 gunicorn
 idna
 krb5

@@ -5,10 +5,10 @@
 <head>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="{%  static 'magicbook/style.css' %}">
+    <link rel="stylesheet" href="{% static 'magicbook/style.css' %}">
     <title> magicbook </title>
 
-    <link type="image/png" sizes="96x96" rel="icon" href={% static 'icons/magic-icon-96.png' %}>
+    <link type="image/png" rel="shortcut icon" href={% static 'icons/magic-icon-96.png' %}>
 
 </head>
 <body>
@@ -19,10 +19,13 @@
     </div>
 </header>
 
-<main class="container">
 
     {% block content %}
+
     {% endblock %}
+
+
+<main class="base">
 
     <div class="container">
         {% if messages %}

@@ -8,9 +8,11 @@ body {
 
 
 .titulo {
-    padding-bottom: 2%;
+    padding-bottom: 1%;
 }
 
+
+img { border-radius: 8px; }
 
 /* aprendido de https://www.w3schools.com/css/css_navbar_horizontal.asp */
 
@@ -57,14 +59,14 @@ header {position: sticky;top: 0;}
 .titulo h1 {
     font-family: "IBM Plex Sans", sans-serif;
     text-align: center;
-    font-size:30px; font-weight:300; color:#222; letter-spacing:3px;
+    font-size:32px; font-weight:300; color:#222; letter-spacing:3px;
     display: grid;
     grid-template-columns: 1fr max-content 1fr;
     grid-template-rows: 24px 0;
     grid-gap: 12px;
     align-items: center;
     position: relative;
-    padding-top: 0.75%;
+    padding-top: 1%;
     scroll-margin-top: 1em;
 }
 

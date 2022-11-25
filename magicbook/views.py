@@ -9,10 +9,9 @@ from django.contrib.auth.decorators import login_required
 # from django.contrib.auth import views as auth_view
 
 from .forms import UserRegistrationForm, FormDream, FormJsonAPIS
-from .models import Usuario
+from .models import Usuario, AiAnswer
 from .stablediff import generarImagen
 from os import environ as env_keys
-from pprint import pprint
 
 import json
 # Create your views here.
@@ -66,12 +65,13 @@ def perfil(request,username):
         if 'save_prompt' in request.POST:
             formato = FormDream(request.POST)
             if formato.is_valid():
-                messages.success(request, f' Generando imagen...')
+                messages.info(request, f' Generando imagen...')
                 img_url = generarImagen(formato.cleaned_data.get('prompt'))
             context = {
                 'form_prompt': formato,
                 'img_generada': img_url[0]
             }
+            #new_prompt = AiAnswer()
 
             return render(request, 'profile.html', context)
 
@@ -79,7 +79,7 @@ def perfil(request,username):
             new_apis = FormJsonAPIS(request.POST)
             apis_json = {}
             if new_apis.is_valid():
-                apis_json = json.loads(new_apis.cleaned_data.get('api_keys'))
+                apis_json = new_apis.cleaned_data.get('api_keys')
                 current_user.api_keys = apis_json
                 current_user.save()
             context = {
@@ -106,6 +106,12 @@ def perfil(request,username):
             'user_apikeys': user_apis
         }
         return render(request, 'profile.html', context)
+
+
+
+
+def prompts_json(request):
+    data_prompts = list()
 
 
 

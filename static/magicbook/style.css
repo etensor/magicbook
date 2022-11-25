@@ -6,6 +6,14 @@ body {
     flex-direction: column;
 }
 
+/* This changes all the animations globally */
+/* Animate.css -> darle vida a los componentes */
+
+:root {
+  --animate-duration: 1.5s;
+  --animate-delay: 3s;
+}
+
 
 .titulo {
     padding-bottom: 1%;

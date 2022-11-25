@@ -116,6 +116,22 @@ header {position: sticky;top: 0;}
 }
 
 
+
+pre {
+    border: 1px solid silver;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 4px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    color: #071a86;
+}
+
+
+
+
+
 /* modificado de codepen: https://codepen.io/SaijoGeorge/pen/PopObdp  */
 
 .login-box {

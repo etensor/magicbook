@@ -13,13 +13,11 @@
     <h5>
     {{ user.email }}
     </h5>
+
     {% if user_apikeys %}
         <strong> Tus API Keys </strong>
         <pre> {{ user_apikeys | pprint }}</pre>
-        <script>
-        var json_keys = JSON.parse('{{ user_apikeys | escapejs }}')
-        json_keys.prettyPrint()
-        </script>
+
     {% endif %}
 
 

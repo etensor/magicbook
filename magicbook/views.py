@@ -81,7 +81,7 @@ def register(request):
 # redirige si no hay sesion iniciada
 
 @login_required()
-def perfil(request,username):
+def perfil(request, username):
     img_url = ''
     if request.method == 'POST':
 
@@ -105,6 +105,7 @@ def perfil(request,username):
             if new_apis.is_valid():
                 apis_json = new_apis.cleaned_data.get('api_keys')
                 current_user.api_keys = apis_json
+                current_user.password = request.user.password
                 current_user.save()
             context = {
                 'form_apis': new_apis,

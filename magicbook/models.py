@@ -6,7 +6,7 @@ class Usuario(models.Model):
     id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False)
     username = models.CharField(max_length=50, verbose_name='Username')
     email = models.EmailField()
-    password = models.CharField(max_length=50, verbose_name='Password')
+    password = models.CharField(max_length=128, verbose_name='Password')
     api_keys = models.JSONField(default=dict, blank=True, null=True)
 
     def __str__(self):

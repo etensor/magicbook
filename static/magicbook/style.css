@@ -151,9 +151,9 @@ pre {
     align-content: center;
     height: 95%;
     left: 50%;
-    width: 68%;
+    width: 60%;
     padding: 16px;
-    margin-top: 30%;
+    margin-top: 20%;
     background: rgba(0,0,0,.5);
     transform: translate(-50%,-20%);
     box-sizing: border-box;

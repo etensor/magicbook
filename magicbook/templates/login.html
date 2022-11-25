@@ -11,29 +11,40 @@
             <legend class="border-bottom mb-4" style="color: rgb(102,185,62); text-align: center;">
                 Ingresar
             </legend>
-            {{ form|crispy }}
+            {{ form | crispy }}
         </fieldset>
         </div>
 
         <div style="text-align: center;">
-            <div class="form-group" id="signup-btn">
+            <div class="form-group">
                 <hr>
                 <button class="btn btn-outline-light btn-lg btn-block">
-                    Login
+                      &nbsp; &nbsp; Login  &nbsp; &nbsp;
                 </button>
             </div>
         </div>
 
-        <div class="form-group" style="padding-left: 50%">
+        <div class="float-right">
             <small class="text-muted">
                 No tienes cuenta? crea una.
             </small>
-
             <a href="/register"> Registrarse </a>
 
         </div>
     </form>
+    <hr>
 
 </div>
+
+<div class="text-center">
+    <small class="text-muted">
+        Olvidaste tu contraseña?
+    </small>
+    &nbsp; &nbsp; &nbsp; &nbsp;
+    <a class="btn btn-sm btn-outline-warning" href="/resetPassword">
+        Recuperar contraseña
+    </a>
+</div>
+
 
 {% endblock %}

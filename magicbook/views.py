@@ -1,6 +1,7 @@
 from pprint import pprint
 
 from django.http import HttpResponse  # HttpResponseRedirect
+from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.template import loader
 # from django.contrib.auth.forms import UserCreationForm
@@ -8,11 +9,13 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from django.core.mail import send_mail
-from django.conf import settings
 
 # from django.urls import reverse
 # from django.contrib.auth import login
-# from django.contrib.auth import views as auth_view
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.views import PasswordChangeView, PasswordResetView
+from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
+
 from .forms import UserRegistrationForm, FormDream, FormJsonAPIS
 from .models import Usuario, AiAnswer
 
@@ -137,19 +140,26 @@ def perfil(request,username):
         return render(request, 'profile.html', context)
 
 
+class ChangePassView(SuccessMessageMixin, PasswordChangeView):
+    template_name = 'change_password.html'
+    success_url = reverse_lazy('home')
+    success_message = "Tu contraseña ha sido cambiada."
+
+
+class ResetPassView(SuccessMessageMixin, PasswordResetView):
+    template_name = 'reset_password.html'
+    success_url = reverse_lazy('home')
+    success_message = 'A tu correo fueron enviadas las instrucciones para \n \
+                       reestablecer tu contraseña.'
 
 
 def prompts_json(request):
     data_prompts = list()
 
 
-
-
 def user_page(request, user_id):
     res = f"Tu usuario es: {user_id}, que tal"
     return HttpResponse(res)
-
-
 
 
 

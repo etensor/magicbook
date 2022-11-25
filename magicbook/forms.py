@@ -2,7 +2,7 @@ from django import forms
 from .models import AiAnswer
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-import json
+
 
 class FormDream(forms.Form):
     prompt = forms.CharField(widget=forms.Textarea(attrs={"rows": "5"}))
@@ -33,14 +33,13 @@ class FormJsonAPIS(forms.Form):
         )
     )
 
-    def __init__(self,*args,**kwargs):
-        super().__init__(*args,**kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.fields['api_keys'].label = "Ingresa  tus llaves para los servicios de replicate"   # :D
 
     class Meta:
         model = User
         fields = ['api_keys']
-
 
 
     '''

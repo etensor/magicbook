@@ -4,43 +4,63 @@
 {% block content %}
 
 <div class="container">
-    user:
-    <h4>
-    {{ user.username }}
-    </h4>
 
-    email:
-    <h5>
-    {{ user.email }}
-    </h5>
+    <div class="container">
+        user:
+        <h4>
+        {{ user.username }}
+        </h4>
 
-    {% if user_apikeys %}
-        <strong> Tus API Keys </strong>
-        <pre> {{ user_apikeys | pprint }}</pre>
+        email:
+        <h5>
+        {{ user.email }}
+        </h5>
 
-    {% endif %}
+        {% if user_apikeys %}
+            <strong> Tus API Keys </strong>
+            <pre> {{ user_apikeys | pprint }}</pre>
+
+        {% endif %}
+    </div>
 
 
-    <Form method="post">
+    <Form method="post" style="text-align: right">
+        <br>
         {% csrf_token %}
-        <div style="display: inline;">
-            {{ form_apis.as_p }}
-            <input type="submit" value="Configurar API Keys" name="save_apis">
+        <div class="float-left">
+            {% if form_apis %}
+                <br>
+                <hr>
+                {{ form_apis.as_p }}
+            {% endif %}
+        <input
+            class="btn btn-sm btn-outline-warning" type="submit"
+            value="Configurar API Keys" name="save_apis"
+        >
+        <input
+            class="btn btn-sm btn-outline-danger" type="submit"
+            value="Eliminar keys" name="delete_apis"
+        >
+
         </div>
 
     </Form>
 
-    <a  href="{{ HTTP_HOST }}/" style="padding-left: 40%">
+    <a  class="btn btn-sm btn-outline-secondary"
+        href="{{ HTTP_HOST }}/" style="float: right;">
         Regresar
     </a>
 
-
+    <br>
     <hr>
 
     <form method="post">
         {% csrf_token %}
         {{ form_prompt }}
-        <input type="submit" value="Generar" name="save_prompt">
+        <input type="submit" value="Generar"
+               name="save_prompt"
+               class="btn btn-sm btn-success"
+        >
     </form>
 
 

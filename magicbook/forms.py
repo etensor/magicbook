@@ -24,11 +24,23 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class FormJsonAPIS(forms.Form):
-    api_keys = forms.JSONField()
+    api_keys = forms.JSONField(
+        widget=forms.Textarea(
+            attrs={
+                'class': 'form-control opacity-50',
+                'style': 'height: 10vh;'
+            }
+        )
+    )
+
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['api_keys'].label = "Ingresa  tus llaves para los servicios de replicate"   # :D
 
     class Meta:
         model = User
         fields = ['api_keys']
+
 
 
     '''

@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from django.http import HttpResponse  # HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.template import loader
@@ -89,12 +91,17 @@ def perfil(request,username):
             }
             return render(request, 'profile.html', context)
 
+        elif 'delete_apis' in request.POST:
+            current_user.api_keys = {}
+            current_user.save()
+            return render(request, 'profile.html')
+
     else:
         formato = FormDream()
         new_apis = FormJsonAPIS()
 
         usuario = Usuario.objects.get(username=username)
-        user_apis = {}
+        user_apis = None
         if usuario.api_keys:
             user_apis = usuario.api_keys
             # load api_keys as env vars -> comunicación con services
@@ -103,10 +110,11 @@ def perfil(request,username):
                     continue
                 env_keys[key] = value
 
+
         context = {
             'form_prompt': formato,
-            'form_apis': new_apis,
-            'user_apikeys': user_apis
+            'form_apis': new_apis if 'save_apis' in request.POST else None,
+            'user_apikeys': json.dumps(user_apis) if user_apis else None
         }
         return render(request, 'profile.html', context)
 

@@ -6,12 +6,16 @@ from django.template import loader
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
+from django.core.mail import send_mail
+from django.conf import settings
+
 # from django.urls import reverse
 # from django.contrib.auth import login
 # from django.contrib.auth import views as auth_view
-
 from .forms import UserRegistrationForm, FormDream, FormJsonAPIS
 from .models import Usuario, AiAnswer
+
 from .stablediff import generarImagen
 from os import environ as env_keys
 
@@ -46,6 +50,20 @@ def register(request):
             username = formato.cleaned_data.get('username')
             # asi guardamos variables en la sesion
             request.session['recien_registrado'] = True
+
+            # Enviando correo de bienvenida
+
+            send_mail(
+                subject='Bienvenido a magicbook',
+                message='\nTu cuenta ha sido creada,\n\tempieza ahora a crear arte.',
+                from_email=env_keys['EMAIL_USER'],
+                recipient_list=[usuario.email],
+                auth_user=env_keys['EMAIL_USER'],
+                auth_password=env_keys['EMAIL_PASS'],
+                connection=None,
+                html_message=None,
+                fail_silently=True
+            )
 
             messages.success(request, f'Bienvenido, {username}.\nTu cuenta ha sido creada.')
             # return HttpResponseRedirect(reverse('home', kwargs={context}))

@@ -4,6 +4,7 @@ body {
     background-attachment: fixed;
     min-height: 100vh;
     flex-direction: column;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 /* This changes all the animations globally */
@@ -128,6 +129,18 @@ pre {
     color: #071a86;
 }
 
+/* hide + see divs ! */
+
+.activatediv {
+    outline:none;
+    cursor:pointer;
+}
+
+.hiddendiv{display:none}
+
+.activatediv:focus + .hiddendiv{
+    display: block;
+}
 
 
 /* modificado de codepen: https://codepen.io/SaijoGeorge/pen/PopObdp  */

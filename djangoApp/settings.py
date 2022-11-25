@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from os import path
+from os import environ as env_keys
 import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -145,3 +146,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'home'
 
 LOGIN_URL = 'login'
+
+# config para los correos
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = env_keys['EMAIL_USER']
+EMAIL_HOST_PASSWORD = env_keys['EMAIL_PASS']
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

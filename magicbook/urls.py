@@ -9,7 +9,7 @@ urlpatterns = [
     # path('login/', views.LoginSave.as_view(template_name='login.html')),
     path('login/', auth_view.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_view.LogoutView.as_view(template_name='logout.html'), name='logout'),
-    path('profile/', views.perfil, name='profile'),
+    path('profile/<str:username>', views.perfil, name='profile'),
 
     path('<int:user_id>', views.user_page, name='user_page')
 ]

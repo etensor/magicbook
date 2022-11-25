@@ -8,10 +8,13 @@ from django.contrib.auth.decorators import login_required
 # from django.contrib.auth import login
 # from django.contrib.auth import views as auth_view
 
-from .forms import UserRegistrationForm, FormDream
+from .forms import UserRegistrationForm, FormDream, FormJsonAPIS
 from .models import Usuario
 from .stablediff import generarImagen
+from os import environ as env_keys
+from pprint import pprint
 
+import json
 # Create your views here.
 
 
@@ -55,25 +58,54 @@ def register(request):
 # redirige si no hay sesion iniciada
 
 @login_required()
-def perfil(request):
+def perfil(request,username):
     img_url = ''
     if request.method == 'POST':
-        formato = FormDream(request.POST)
 
-        if formato.is_valid():
-            img_url = generarImagen(formato.cleaned_data.get('prompt'))
-        context = {
-            'form': formato,
-            'img_generada': img_url[0]
-        }
-        return render(request, 'profile.html', context);
+        current_user = Usuario.objects.get(username=request.user.username)
+        if 'save_prompt' in request.POST:
+            formato = FormDream(request.POST)
+            if formato.is_valid():
+                messages.success(request, f' Generando imagen...')
+                img_url = generarImagen(formato.cleaned_data.get('prompt'))
+            context = {
+                'form_prompt': formato,
+                'img_generada': img_url[0]
+            }
+
+            return render(request, 'profile.html', context)
+
+        if 'save_apis' in request.POST:
+            new_apis = FormJsonAPIS(request.POST)
+            apis_json = {}
+            if new_apis.is_valid():
+                apis_json = json.loads(new_apis.cleaned_data.get('api_keys'))
+                current_user.api_keys = apis_json
+                current_user.save()
+            context = {
+                'form_apis': new_apis,
+                'user_apikeys': apis_json,
+            }
+            return render(request, 'profile.html', context)
+
     else:
         formato = FormDream()
+        new_apis = FormJsonAPIS()
+
+        usuario = Usuario.objects.get(username=username)
+        user_apis = {}
+        if usuario.api_keys:
+            user_apis = usuario.api_keys
+            # load api_keys as env vars -> comunicación con services
+            for key, value in user_apis.items():
+                env_keys[key] = value
+
         context = {
-            'form' : formato
+            'form_prompt': formato,
+            'form_apis': new_apis,
+            'user_apikeys': user_apis
         }
         return render(request, 'profile.html', context)
-
 
 
 

@@ -13,17 +13,32 @@
     <h5>
     {{ user.email }}
     </h5>
+    {% if user_apikeys %}
+        <strong> Tus API Keys </strong>
+        <pre> {{ user_apikeys | pprint }}</pre>
+    {% endif %}
+
+
+    <Form method="post">
+        {% csrf_token %}
+        <div style="display: inline;">
+            {{ form_apis.as_p }}
+            <input type="submit" value="Configurar API Keys" name="save_apis">
+        </div>
+
+    </Form>
 
     <a  href="{{ HTTP_HOST }}/" style="padding-left: 40%">
         Regresar
     </a>
 
+
     <hr>
 
     <form method="post">
         {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Generar">
+        {{ form_prompt }}
+        <input type="submit" value="Generar" name="save_prompt">
     </form>
 
 

@@ -10,7 +10,7 @@
     {% if user.is_authenticated %}
         <p style="display: inline; margin-right: 10%"> Usuario: {{ request.user.username }}</p>
         <small>
-            <a  href="{% url 'profile' %}" style="padding-left: -20%; margin-right: 1cm;">
+            <a  href="{% url 'profile' username=request.user.username %}" style="padding-left: -20%; margin-right: 1cm;">
                 perfil
             </a>
             <a  href="{% url 'logout' %}" style="padding-left: -20%;">

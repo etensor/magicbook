@@ -31,10 +31,12 @@
     <div class="container">
         {% if messages %}
             {% for msg in messages %}
-                <div class="animate__animated animate__fadeOutUp">
+                <div class="animate__animated animate__fadeOutUp animate__delay-2s animate__duration-3s">
                     <div class="alert alert-{{ msg.tags }}" role="alert">
                     {{ msg }}
                     </div>
+                    <br>
+                    <br>
                  </div>
             {% endfor %}
         {% endif %}

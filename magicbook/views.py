@@ -42,9 +42,10 @@ def register(request):
             )
             usuario.save()
             username = formato.cleaned_data.get('username')
-            messages.success(request, f'Bienvenido, {username}.\nTu cuenta ha sido creada.')
             # asi guardamos variables en la sesion
             request.session['recien_registrado'] = True
+
+            messages.success(request, f'Bienvenido, {username}.\nTu cuenta ha sido creada.')
             # return HttpResponseRedirect(reverse('home', kwargs={context}))
             return redirect('home')
     else:
@@ -98,6 +99,8 @@ def perfil(request,username):
             user_apis = usuario.api_keys
             # load api_keys as env vars -> comunicación con services
             for key, value in user_apis.items():
+                if isinstance(value, bool): # env vars no pueden ser true/false.
+                    continue
                 env_keys[key] = value
 
         context = {

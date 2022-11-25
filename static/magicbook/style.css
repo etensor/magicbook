@@ -9,9 +9,9 @@ body {
 /* This changes all the animations globally */
 /* Animate.css -> darle vida a los componentes */
 
-:root {
-  --animate-duration: 1.5s;
-  --animate-delay: 3s;
+.animate__animated.animate__fadeOutUp {
+    --animate-duration: 4s;
+    --animate-delay: 6s;
 }
 
 
@@ -205,7 +205,7 @@ pre {
   overflow: hidden;
   transition: .5s;
   margin-top: 40px;
-    margin-left: 30px;
+  margin-left: 30px;
   letter-spacing: 4px;
 }
 

@@ -5,7 +5,24 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class FormDream(forms.Form):
-    prompt = forms.CharField(widget=forms.Textarea(attrs={"rows": "5"}))
+    #usar_ejemplo = forms.BooleanField()
+
+    prompt = forms.CharField(
+        widget=forms.Textarea(
+            attrs={"rows": "5", 'class': 'dreamprompt',
+                   'placeholder': '''titanical cyborg giant squid 
+escaping alien toxic vegetation, 
+intricate Three-point lighting portrait, 
+by Ching Yeh and Greg Rutkowski, detailed cyberpunk 
+in the style of GitS 1995''',
+                   'value': ''},
+        ),
+        min_length=16
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['prompt'].label = 'Ingresa una descripción detallada.'
 
     class Meta:
         model = AiAnswer
@@ -28,14 +45,15 @@ class FormJsonAPIS(forms.Form):
         widget=forms.Textarea(
             attrs={
                 'class': 'form-control opacity-50',
-                'style': 'height: 10vh;'
+                'style': 'height: 10vh;',
             }
         )
     )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['api_keys'].label = "Ingresa  tus llaves para los servicios de replicate"   # :D
+        self.fields['api_keys']\
+            .label = "Ingresa  tus llaves en formato JSON para los servicios de replicate (por ahora)"   # :D
 
     class Meta:
         model = User

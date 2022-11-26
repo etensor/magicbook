@@ -10,6 +10,7 @@ body {
 /* This changes all the animations globally */
 /* Animate.css -> darle vida a los componentes */
 
+
 .animate__animated.animate__fadeOutUp {
     --animate-duration: 4s;
     --animate-delay: 6s;
@@ -20,8 +21,21 @@ body {
     padding-bottom: 1%;
 }
 
-
 img { border-radius: 8px; }
+
+.dreamprompt {
+    border-radius: 8px;
+    text-align: justify;
+    display: inline-block;
+    font-family: 'Caveat', cursive;
+    font-size: 24px;
+    opacity: 0.6;
+    color: black;
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+
+}
+
 
 /* aprendido de https://www.w3schools.com/css/css_navbar_horizontal.asp */
 

@@ -21,9 +21,12 @@
             <i class="bi bi-key"></i>
             <strong> &nbsp; Tus API Keys &nbsp;&nbsp; </strong>
 
-            <div class="activatediv btn btn-outline-info" tabindex="1">Ver tus keys</div>
+            <div class="activatediv btn btn-outline-info" tabindex="1">
+                Ver tus keys
+            </div>
+
             <div class="hiddendiv">
-                <pre> {{ user_apikeys | pprint }}</pre>
+            <pre id="prettyJSON"> {{ user_apikeys | pprint }}</pre>
             </div>
 
         {% endif %}
@@ -65,13 +68,15 @@
 
     <br>
     <hr>
+    <br>
 
-    <form method="post">
+    <form method="post" style="text-align: center;">
         {% csrf_token %}
         {{ form_prompt }}
+        <br>
         <input type="submit" value="Generar"
                name="save_prompt"
-               class="btn btn-sm btn-success"
+               class="btn btn-lg btn-success"
         >
     </form>
 

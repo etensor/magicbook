@@ -12,4 +12,15 @@ function printPrettyJSON() {
       JSONInPrettyFormat;
 }
 
-*/
+// esta funcion -> funciona mal : no hace lo que uno creeria que hace... ni idea....
+
+function usarEjemplo(){
+    var promptinput = document.getElementById('promptEjemplo');
+    promptinput.value = `titanical cyborg giant squid 
+escaping alien toxic vegetation, 
+intricate Three-point lighting portrait, 
+by Ching Yeh and Greg Rutkowski, detailed cyberpunk 
+in the style of GitS 1995`
+}
+
+ */

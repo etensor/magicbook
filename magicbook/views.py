@@ -14,8 +14,8 @@ from django.core.mail import send_mail
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView
 
-from .forms import UserRegistrationForm, FormDream, FormJsonAPIS
-from .models import Usuario, AiAnswer
+from .forms import UserRegistrationForm, FormDream, FormJsonAPIS, NewDreamForm
+from .models import Usuario, AiAnswer, Dream
 
 from .stablediff import generarImagen
 from os import environ as env_keys
@@ -80,15 +80,22 @@ def register(request):
 
 @login_required()
 def perfil(request, username):
-    img_url = ''
+    img_url = '-'
     if request.method == 'POST':
-
         current_user = Usuario.objects.get(username=request.user.username)
+
         if 'save_prompt' in request.POST:
             formato = FormDream(request.POST)
+
             if formato.is_valid():
+                dream_prompt = formato.cleaned_data.get('prompt')
                 messages.info(request, f' Generando imagen...')
-                img_url = generarImagen(formato.cleaned_data.get('prompt'))
+
+                ### aca link dream - answer
+
+                if dream_prompt:
+                    img_url = generarImagen(dream_prompt)
+
             context = {
                 'form_prompt': formato,
                 'img_generada': img_url[0]
@@ -111,14 +118,36 @@ def perfil(request, username):
             }
             return render(request, 'profile.html', context)
 
-        elif 'delete_apis' in request.POST:
+        if 'delete_apis' in request.POST:
             current_user.api_keys = {}
             current_user.save()
             return render(request, 'profile.html')
 
+        if 'crear_dream' in request.POST:
+            new_dream_form = NewDreamForm(request.POST)
+            if new_dream_form.is_valid():
+                a_dream = new_dream_form.cleaned_data
+                user_dreams = Dream.objects.filter(title=a_dream.get('title'))
+
+                if not user_dreams:
+                    new_dream = Dream(title=a_dream.get('title'),
+                                  is_public=a_dream.get('is_public'),
+                                  userId=current_user)
+                    new_dream.save()
+                    messages.success(request, 'Nuevo Dream creado.')
+                else:
+                    messages.info(request, 'No puedes repetir titulos.')
+
+            context = {
+                'form_dream': new_dream_form
+            }
+
+            return render(request, 'profile.html', context)
+
     else:
         formato = FormDream()
         new_apis = FormJsonAPIS()
+        new_dream_form = NewDreamForm()
 
         usuario = Usuario.objects.get(username=username)
         user_apis = None
@@ -130,13 +159,14 @@ def perfil(request, username):
                     continue
                 env_keys[key] = value
 
-
         context = {
+            'form_dream': new_dream_form,
             'form_prompt': formato,
             'form_apis': new_apis if 'save_apis' in request.POST else None,
             'user_apikeys': user_apis if user_apis else None
         }
         return render(request, 'profile.html', context)
+
 
 
 class ChangePassView(SuccessMessageMixin, PasswordChangeView):
@@ -150,6 +180,8 @@ class ResetPassView(SuccessMessageMixin, PasswordResetView):
     success_url = reverse_lazy('home')
     success_message = 'A tu correo fueron enviadas las instrucciones para \n \
                        reestablecer tu contraseña.'
+
+
 
 
 def prompts_json(request):

@@ -21,19 +21,51 @@ body {
     padding-bottom: 1%;
 }
 
-img { border-radius: 8px; }
+img {
+    border: 1px  black;
+    border-radius: 8px;
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,20,70,.7);
+}
 
 .dreamprompt {
     border-radius: 8px;
-    text-align: justify;
-    display: inline-block;
-    font-family: 'Caveat', cursive;
-    font-size: 24px;
+    display: block;
+    font-family: 'Anonymous Pro', monospace;
+    font-size: 18px;
     opacity: 0.6;
     color: black;
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    margin: auto;
+}
 
+/* CSS EFFECT -> Docs. <- modificado de codepen | one line doesn't suffice.. */
+
+.typewriter {
+  color: #000000;mix-blend-mode: revert;
+  font-family: monospace;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .14em solid orange; /* The typwriter cursor */
+  text-align: left;
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  animation:
+    typing 5s steps(75, end),
+    blink-caret 1.2s step-end infinite;
+}
+
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
 }
 
 

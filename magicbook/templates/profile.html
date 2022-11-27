@@ -8,12 +8,13 @@
     <div class="container">
         <i class="bi bi-person-circle"></i>
         &nbsp; user:
-        <h4 style="margin-left: 2%;">
+        <h4 style="margin-left: 4%;">
         {{ user.username }}
         </h4>
 
-        email:
-        <h5 style="margin-left: 2%;">
+        <i class="bi bi-fingerprint"></i>
+        &nbsp; email:
+        <h5 style="margin-left: 4%;">
         {{ user.email }}
         </h5>
 
@@ -65,27 +66,50 @@
         Regresar
     </a>
 
-    <br>
-    <hr>
+    <br><hr><br>
+
+    <form method="post" style="text-align: center;">
+        {% csrf_token %}
+        {{ form_dream.as_p }}
+        <br>
+        <button type="submit" name="crear_dream" class="btn btn-lg btn-outline-success">
+            <i class="bi bi-activity"></i> Nuevo Dream
+        </button>
+    </form>
+
+
+    <br><hr><br>
+    <p style="text-align: center;"> Una buena descripción incluye detalles. No olvides darle estilos.</p>
+    <div class="typewriter" style="width: fit-content;">
+        A spaceship firing energy cannons at a menacing monster, john berkey, digital art.
+    </div>
+
+    <br><hr>
+
+    {% if img_generada %}
+        <div style="text-align: center">
+            <img src="{{ img_generada }}"/>
+        </div>
+    {% endif %}
     <br>
 
     <form method="post" style="text-align: center;">
         {% csrf_token %}
+
         {{ form_prompt.as_ul }}
         <br>
-        <input type="submit" value="Generar"
-               name="save_prompt"
-               class="btn btn-lg btn-success"
-        >
+
+        <button type="submit" name="save_prompt" class="btn btn-lg btn-success">
+            <i class="bi bi-balloon"></i> Generar
+        </button>
+
     </form>
 
 
-    {% if img_generada %}
-        <div style="justify-content: center">
-            <img src="{{ img_generada }}"/>
-        </div>
-    {% endif %}
-
+    <!-- <input type="checkbox" id="promptEjemplo" onclick="usarEjemplo()"/>
+    <label for="promptEjemplo">  &nbsp;Usar ejemplo</label> -->
+    <hr>
+    <br>
 
 </div>
 

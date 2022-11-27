@@ -13,18 +13,19 @@ class Usuario(models.Model):
         return f"{self.username} | ID: {self.id} , {self.email}"
 
 
-
 class Dream(models.Model):
     id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False)
     fecha = models.DateTimeField(auto_now_add=True)
-    titulo = models.TextField(max_length=200)
-    is_public = models.BooleanField(default=False)
+    title = models.TextField(max_length=400, unique=True)
+    is_public = models.BooleanField(default=True, null=False)
     userId = models.ForeignKey(Usuario, on_delete=models.CASCADE)  # BigAutoField -> ?
-    title = models.TextField(max_length=400)
+
 
     def get_prompts(self):
         pass
 
+    def get_dreams(self):
+        pass
 
 
 class AiAnswer(models.Model):

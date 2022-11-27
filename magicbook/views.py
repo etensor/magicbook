@@ -1,4 +1,3 @@
-from pprint import pprint
 
 from django.http import HttpResponse  # HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -14,7 +13,6 @@ from django.core.mail import send_mail
 # from django.contrib.auth import login
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView
-from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
 
 from .forms import UserRegistrationForm, FormDream, FormJsonAPIS
 from .models import Usuario, AiAnswer
@@ -128,7 +126,7 @@ def perfil(request, username):
             user_apis = usuario.api_keys
             # load api_keys as env vars -> comunicación con services
             for key, value in user_apis.items():
-                if isinstance(value, bool): # env vars no pueden ser true/false.
+                if not isinstance(value, str):  # env vars no pueden ser no strings
                     continue
                 env_keys[key] = value
 
@@ -136,7 +134,7 @@ def perfil(request, username):
         context = {
             'form_prompt': formato,
             'form_apis': new_apis if 'save_apis' in request.POST else None,
-            'user_apikeys': json.dumps(user_apis) if user_apis else None
+            'user_apikeys': user_apis if user_apis else None
         }
         return render(request, 'profile.html', context)
 

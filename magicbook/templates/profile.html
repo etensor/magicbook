@@ -18,15 +18,14 @@
         </h5>
 
         {% if user_apikeys %}
-            <i class="bi bi-key"></i>
-            <strong> &nbsp; Tus API Keys &nbsp;&nbsp; </strong>
 
-            <div class="activatediv btn btn-outline-info" tabindex="1">
-                Ver tus keys
-            </div>
-
-            <div class="hiddendiv">
-            <pre id="prettyJSON"> {{ user_apikeys | pprint }}</pre>
+            <input type="checkbox" class="activatediv" style="float: right;"/>
+            <label for="activatediv" class="form-check-label" style="float: right;"> Ver tus keys &nbsp;</label>
+            <div class="hiddendiv"><br>
+            <i class="bi bi-key"></i> <strong> &nbsp; Tus API Keys &nbsp;&nbsp; </strong>
+                {% for k,val in user_apikeys.items %}
+                    <pre tabindex="0"> {{ k | pprint }}: {{ val | pprint }},</pre>
+                {% endfor %}
             </div>
 
         {% endif %}
@@ -34,7 +33,7 @@
 
 
     <Form method="post" style="text-align: right">
-        <br>
+        <br><br>
         {% csrf_token %}
         <div class="float-left">
             {% if form_apis %}
@@ -72,7 +71,7 @@
 
     <form method="post" style="text-align: center;">
         {% csrf_token %}
-        {{ form_prompt }}
+        {{ form_prompt.as_ul }}
         <br>
         <input type="submit" value="Generar"
                name="save_prompt"
@@ -86,7 +85,6 @@
             <img src="{{ img_generada }}"/>
         </div>
     {% endif %}
-
 
 
 </div>

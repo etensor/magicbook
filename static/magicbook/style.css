@@ -37,6 +37,8 @@ img { border-radius: 8px; }
 }
 
 
+
+
 /* aprendido de https://www.w3schools.com/css/css_navbar_horizontal.asp */
 
 .navElem {
@@ -110,7 +112,7 @@ header {position: sticky;top: 0;}
 
 .homeinfo {
     text-align: center;
-    font-family: "Fira Code Light";
+    font-family: "Fira Code Light", sans-serif;
 }
 
 
@@ -124,7 +126,7 @@ header {position: sticky;top: 0;}
     width: fit-content;
     /* Height of the footer*/
     height: 2%;
-    font-family: "Fira Code Light";
+    font-family: "Fira Code Light", sans-serif;
     flex-grow: 1;
     color: rgba(208, 184, 45,0.85);
     mix-blend-mode: difference;
@@ -140,7 +142,8 @@ pre {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    color: #071a86;
+    color: #fae62b;
+    mix-blend-mode: difference;
 }
 
 /* hide + see divs ! */
@@ -148,14 +151,16 @@ pre {
 .activatediv {
     outline:none;
     cursor:pointer;
+    width: 20px;
+    height: 20px;
 }
 
-.hiddendiv{display:none}
+.hiddendiv{display: none;}
 
-.activatediv:focus + .hiddendiv{
+
+.activatediv:checked ~ .hiddendiv {
     display: block;
 }
-
 
 /* modificado de codepen: https://codepen.io/SaijoGeorge/pen/PopObdp  */
 

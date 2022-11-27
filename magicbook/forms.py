@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class FormDream(forms.Form):
-    #usar_ejemplo = forms.BooleanField()
+    usar_ejemplo = forms.BooleanField()
 
     prompt = forms.CharField(
         widget=forms.Textarea(

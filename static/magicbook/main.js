@@ -4,7 +4,8 @@
 // sin eso -> no hace nada laverdad ...
 /*
 function printPrettyJSON() {
-      var badJSON = document.getElementById('prettyJSONFormat').value;
+      //var badJSON = document.getElementById('prettyJSONFormat').value;
+      // by class ? -> map [] of all
       var parseJSON = JSON.parse(badJSON.prettyPrint());
       var JSONInPrettyFormat = JSON.stringify(parseJSON, undefined, 4);
       document.getElementById('prettyJSONFormat').value =

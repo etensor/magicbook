@@ -22,6 +22,10 @@
 
     <link type="image/png" rel="shortcut icon" href={% static 'icons/magic-icon-96.png' %}>
 
+    <!-- Javascript -> dark reader css -> pal dark mode aleta -->
+    <!-- no sirve :( <script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.58/darkreader.min.js"></script> -->
+    <script src="{% static 'magicbook/main.js' %}"></script>
+
 </head>
 <body>
 
@@ -31,10 +35,11 @@
     </div>
 </header>
 
-
-<script src="{% static 'magicbook/main.js' %}"></script>
-
 <main class="base">
+
+<button id="darkButton" onclick="activarDarkMode()">
+    <i class="bi bi-lightbulb"></i>
+</button>
 
     <div class="container">
         {% if messages %}

@@ -1,10 +1,24 @@
 
 body {
-    background: linear-gradient(#fff1f1, #243555);
-    background-attachment: fixed;
+    background: linear-gradient(to bottom left, #fff1f1, #243555);
+    background-attachment: scroll;
     min-height: 100vh;
     flex-direction: row;
     font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.dark-modo {
+    background: linear-gradient(to top right, #b7c7b7,#042054);
+    background-attachment: scroll;
+    min-height: 100vh;
+    flex-direction: row;
+    font-family: 'IBM Plex Sans', sans-serif;
+    filter: hue-rotate(-0.5turn) invert(100%);
+
+}
+
+.dark-image {
+    filter: invert(100%) hue-rotate(0.5turn);
 }
 
 /* This changes all the animations globally */
@@ -19,6 +33,7 @@ body {
 
 .titulo {
     padding-bottom: 1%;
+    margin-bottom: 1%;
 }
 
 img {
@@ -28,10 +43,13 @@ img {
     box-shadow: 0 15px 25px rgba(0,20,70,.7);
 }
 
+
+
 .dreamprompt {
     border-radius: 8px;
     display: block;
-    font-family: 'Anonymous Pro', monospace;
+    font-family: 'Anonymous Pro', sans-serif;
+    width: 75%;
     font-size: 18px;
     opacity: 0.6;
     color: black;
@@ -139,8 +157,40 @@ header {position: sticky;top: 0;}
     border-bottom: 1px solid #c50000;
     border-top: 1px solid #d2b51a;
     height: 5px;
-  background-color:#f8f8f8;
+    background-color:#00000000;
 }
+
+/* css -> too much fun */
+
+.titulo h1:hover{
+    animation: titl-anim 1.5s linear infinite;
+}
+
+@keyframes titl-anim {
+  0% {
+    text-shadow:
+        1px -2px 4px rgba(208, 11, 11, 0.64),
+        -2px 2px 2px rgb(220, 196, 39)
+  }
+  33%{
+    text-shadow:
+        1px -1px 3px rgba(189, 194, 1, 0.62),
+        -2px 2px 2px rgb(28, 103, 10)
+
+  }
+  66% {
+    text-shadow:
+        1px -2px 4px rgba(103, 255, 124, 0.7),
+        -2px 3px 3px rgb(3, 78, 100)
+  }
+  100% {
+    text-shadow:
+        1px -2px 4px rgba(208, 11, 11, 0.64),
+        -2px 2px 2px rgb(220, 196, 39)
+  }
+
+}
+
 
 .homeinfo {
     text-align: center;
@@ -168,9 +218,9 @@ audio {
     width: 85%;
 }
 
-audio:hover {
-    width: 25vw;
-    margin-left: calc(75% - 25vw);
+audio:focus {
+    width: 30vw;
+    margin-left: calc(75% - 30vw);
 }
 
 .container-audio {
@@ -184,6 +234,16 @@ audio:hover {
     margin: auto 2%;
 }
 
+#darkButton {
+    padding: 8px;
+    border-radius: 8px;
+    position: fixed;
+    right: 1%;
+    top: 4%;
+    margin: 1%;
+    background-color: lightyellow;
+    border: 0;
+}
 
 
 pre {

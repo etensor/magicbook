@@ -18,6 +18,7 @@ body {
 }
 
 .dark-image {
+    transition: filter 1.5s ease-in-out;
     filter: invert(100%) hue-rotate(0.5turn);
 }
 

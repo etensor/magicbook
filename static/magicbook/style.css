@@ -3,7 +3,7 @@ body {
     background: linear-gradient(#fff1f1, #243555);
     background-attachment: fixed;
     min-height: 100vh;
-    flex-direction: column;
+    flex-direction: row;
     font-family: 'IBM Plex Sans', sans-serif;
 }
 
@@ -149,19 +149,39 @@ header {position: sticky;top: 0;}
 
 
 #footer, #footer p {
+    display: block;
     position: sticky;
-    top: 100vh;
-    padding: 4px;
-    bottom: 2px;
+    top: 97%;
+    bottom: 3px;
+    padding-top: 2%;
     text-align: center;
     margin: 0 auto;
     width: fit-content;
     /* Height of the footer*/
-    height: 2%;
+    height: 1%;
     font-family: "Fira Code Light", sans-serif;
-    flex-grow: 1;
     color: rgba(208, 184, 45,0.85);
     mix-blend-mode: difference;
+}
+
+audio {
+    width: 85%;
+}
+
+audio:hover {
+    width: 25vw;
+    margin-left: calc(75% - 25vw);
+}
+
+.container-audio {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    height: auto;
+    width: fit-content;
+    flex-grow: 2;
+    margin: auto 2%;
 }
 
 

@@ -1,8 +1,27 @@
 {% load static %}
 
 <div id="footer">
-    <a href="https://github.com/etensor/magicbook">
+    <a href="https://github.com/etensor/magicbook"
+       style="flex: 1;">
         <img src={% static 'icons/GitHub-Mark-32px.png' %}>
         <p> github.com/etensor/magicbook </p>
     </a>
+        <!-- all copyrights to Arvo Part & Rolf Uusväli
+        yt: watch?v=2anihZn_f7g&ab_channel=RolfUusv%C3%A4li
+        css esta muy aspero
+    -->
+    {% if user.is_authenticated %}
+
+    <div class="container-audio">
+        <i class="bi bi-music-note"></i>
+        <audio controls loop autoplay>
+            <source src="{% static 'magicbook/triviumrolfpart.mp3' %}"
+                type="audio/mp3">
+        </audio>
+    </div>
+
+    {% endif %}
+
 </div>
+
+
